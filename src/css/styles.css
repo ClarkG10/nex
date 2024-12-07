@@ -1,0 +1,169 @@
+.color {
+    color: #9B4DCA !important
+}
+
+body {
+    font-family: 'League Spartan' !important;
+    background-color: #f6f6f6 !important;
+
+}
+
+.bg {
+    background-color: #9B4DCA !important
+}
+
+.nav-link {
+    opacity: 70%;
+}
+
+.nav-link:hover {
+    opacity: 100%;
+    font-weight: 600;
+    border-bottom: 2px solid white !important;
+    margin-bottom: -10px !important;
+}
+
+.center-card {
+    position: absolute;
+    top: 50%;
+    left: 65%;
+    transform: translate(-50%, -50%);
+}
+
+.center-card1 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.border-violet {
+    border: 1px solid #9B4DCA !important;
+    border-radius: 8px;
+}
+
+.border-violet-nohover {
+    border: 1px solid #9B4DCA !important;
+    border-radius: 8px;
+}
+
+.border-violet>a {
+    color: #9B4DCA;
+}
+
+
+.border-violet:hover {
+    border: 1px solid #9B4DCA !important;
+    border-radius: 8px;
+    background-color: #9B4DCA !important;
+    color: white !important;
+}
+
+.border-violet>a:hover {
+    color: white !important;
+}
+
+
+.form-floating .form-control:focus~label,
+.form-floating .form-control:not(:placeholder-shown)~label {
+    transform: translateY(-1.5rem) scale(0.85) !important;
+    font-size: 17px !important;
+}
+
+.form-floating input,
+.form-floating select {
+    height: calc(3.5rem + 2px) !important;
+    border: 1px solid #aaabac !important;
+    border-radius: 0.25rem !important;
+    background-color: none !important;
+
+}
+
+.form-floating textarea {
+    height: calc(100px) !important;
+    border: 1px solid #aaabac !important;
+    border-radius: 0.25rem !important;
+
+}
+
+.form-floating label {
+    padding: 1rem 0.75rem !important;
+    background-color: transparent !important;
+    font-size: 15px !important;
+
+}
+
+.form-control:focus {
+    box-shadow: none !important;
+    outline: none !important;
+    border-color: #9B4DCA !important;
+}
+
+.activeLink {
+    color: white !important;
+    font-weight: 700;
+    background-color: #9B4DCA !important;
+    padding: 12px;
+    text-decoration: none !important;
+}
+
+.navlinkHover {
+    color: #9B4DCA !important;
+    opacity: 70% !important;
+    padding: 12px;
+    text-decoration: none !important;
+}
+
+.navlinkHover:hover {
+    color: white !important;
+    font-weight: 700;
+    background-color: #9B4DCA !important;
+    opacity: 100% !important;
+    padding: 12px;
+}
+
+.navlinkHover:hover img {
+    filter: brightness(0) invert(1);
+}
+
+.navlinkHover img {
+    transition: filter 0.2s ease;
+}
+
+.border-violet:hover img {
+    filter: brightness(0) invert(1);
+}
+
+table thead {
+    background-color: #9B4DCA !important;
+    color: white !important;
+}
+
+.page-link {
+    color: #9B4DCA !important;
+}
+
+.reorderButton {
+    background-color: #9B4DCA !important;
+}
+
+.reorderButton:hover {
+    background-color: #8744ae !important;
+}
+
+.activeHoverLink {
+    font-weight: 600 !important;
+    padding-bottom: 5px;
+    border-bottom: 2px solid #9B4DCA;
+}
+
+.notActiveHoverLink {
+    opacity: 75% !important;
+}
+
+.notActiveHoverLink:hover {
+    opacity: 100% !important;
+    font-weight: 600 !important;
+    padding-bottom: 5px;
+    border-bottom: 2px solid #9B4DCA;
+}

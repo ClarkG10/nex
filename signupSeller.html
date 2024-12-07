@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="src/css/styles.css" />
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <script type="module" src="assets/js/bootstrap.bundle.min.js"></script>
+    <link
+      href="https://fonts.googleapis.com/css?family=League Spartan"
+      rel="stylesheet"
+    />
+    <script type="module" src="src/js/auth/signupSeller.js"></script>
+    <title>Register</title>
+  </head>
+  <body class="bg-white">
+    <div
+      class="center-card1 p-4 text-center"
+      style="width: 450px; margin-top: 100px !important"
+    >
+      <div><img src="src/imgs/NEX1.png" alt="logo" width="100px" /></div>
+      <div class="fw-bold fs-5 mb-2">Create an account</div>
+      <form id="form_register">
+        <div class="form-floating mb-3">
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            placeholder="name@example.com"
+            name="email"
+            required
+          />
+          <label for="floatingInput">Email address</label>
+        </div>
+        <div class="d-flex">
+          <div class="form-floating mb-3 me-3">
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              placeholder="Password"
+              name="password"
+              required
+            />
+            <label for="floatingPassword">Password</label>
+          </div>
+          <div class="form-floating mb-2">
+            <input
+              type="password"
+              class="form-control"
+              id="password_confirmation"
+              placeholder="Password Confirmation"
+              name="password_confirmation"
+              required
+            />
+            <label for="floatingPassword">Confirm Password</label>
+          </div>
+        </div>
+        <div class="form-floating mb-3">
+          <select
+            class="form-select form-control"
+            id="business_type"
+            aria-label="Floating label select example"
+            name="business_type"
+            required
+          >
+            <option disabled selected>Select Business type</option>
+            <option value="Retail">Retailer</option>
+            <option value="Vendor">Vendor</option>
+          </select>
+          <label for="floatingSelect">Business type</label>
+        </div>
+        <div class="d-flex">
+          <div class="form-floating mb-2 me-3">
+            <input
+              type="text"
+              class="form-control"
+              id="business_name"
+              placeholder="Business Name"
+              name="business_name"
+              required
+            />
+            <label for="floatingPassword">Business Name</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input
+              type="number"
+              class="form-control"
+              id="business_number"
+              placeholder="Business Number"
+              name="business_number"
+              required
+            />
+            <label for="floatingInput">Business Number</label>
+          </div>
+        </div>
+        <div class="d-flex">
+          <div class="form-floating mb-3 me-3">
+            <input
+              type="number"
+              class="form-control"
+              id="phone_number"
+              placeholder="Phone Number"
+              name="phone_number"
+              required
+            />
+            <label for="floatingInput">Phone Number</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input
+              type="text"
+              class="form-control"
+              id="business_address"
+              placeholder="Business Address"
+              name="business_address"
+              required
+            />
+            <label for="floatingInput">Business Address</label>
+          </div>
+        </div>
+        <div class="d-flex">
+          <div class="form-floating mb-3 me-3">
+            <input
+              type="text"
+              class="form-control"
+              id="country"
+              placeholder="Country"
+              name="country"
+              required
+            />
+            <label for="floatingInput">Country</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input
+              type="text"
+              class="form-control"
+              id="city"
+              placeholder="City"
+              name="city"
+              required
+            />
+            <label for="floatingInput">City</label>
+          </div>
+        </div>
+        <div class="d-flex">
+          <div class="form-floating mb-3 me-3">
+            <input
+              type="number"
+              class="form-control"
+              id="zipcode"
+              placeholder="Zipcode"
+              name="zipcode"
+              required
+            />
+            <label for="floatingInput">Zipcode</label>
+          </div>
+          <div class="form-floating mb-2">
+            <input
+              type="text"
+              class="form-control"
+              id="operating_hours"
+              placeholder="Operating Hour"
+              name="operating_hours"
+              required
+            />
+            <label for="floatingInput">Operating Hour</label>
+          </div>
+        </div>
+        <div class="form-floating mb-3">
+          <input
+            type="file"
+            class="form-control"
+            id="image_path"
+            placeholder="Image"
+            accept="image/*"
+            name="image_path"
+          />
+          <label for="floatingInput">Profile Picture</label>
+        </div>
+        <div>
+          <button
+            type="submit"
+            class="btn bg text-white w-100 d-flex justify-content-center align-items-center"
+          >
+            Create an account
+          </button>
+        </div>
+        <div class="position-relative my-4">
+          <hr />
+          <div
+            class="position-absolute px-2"
+            style="top: -15px; right: 45%; background-color: white"
+          >
+            or
+          </div>
+        </div>
+      </form>
+      <div class="mt-2 text-center">Already have an account?</div>
+      <div>
+        <a class="text-decoration-none color" href="index.html">
+          <span class="btn border-violet w-100 mt-2 mb-2">Sign In</span>
+        </a>
+      </div>
+    </div>
+  </body>
+</html>

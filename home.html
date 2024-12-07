@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="src/css/styles.css" />
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <script type="module" src="assets/js/bootstrap.bundle.min.js"></script>
+    <link
+      href="https://fonts.googleapis.com/css?family=League Spartan"
+      rel="stylesheet"
+    />
+    <title>Home</title>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <div
+      class="p-3 bg-white position-fixed w-100 shadow-sm"
+      style="z-index: 1030"
+    >
+      <div class="d-flex justify-content-between align-items-center mx-2">
+        <!-- logo -->
+        <div class="d-flex">
+          <img src="src/imgs/NEX1.png" alt="Logo" width="35px" />
+          <i class="ms-1 fw-bold fs-5 color mt-1">NEX</i>
+        </div>
+        <div>
+          <a
+            href="home.html"
+            class="text-decoration-none color activeHoverLink px-3 mx-2"
+            >Home</a
+          >
+          <a
+            href="storeList.html"
+            class="text-decoration-none color notActiveHoverLink px-3 mx-2"
+            >Shop</a
+          >
+          <a
+            href="productList.html"
+            class="text-decoration-none color notActiveHoverLink px-3 mx-2"
+            >Products</a
+          >
+          <!-- not login -->
+          <img
+            class="rounded-circle mx-2"
+            style="aspect-ratio: 1/1"
+            src="src/imgs/clark.jpg"
+            alt="User"
+            width="30px"
+          />
+          <!-- cart icon -->
+          <a href="cart.html" class="text-decoration-none">
+            <img
+              src="src/icon/basket-shopping-simple-v.png"
+              alt=""
+              width="25px"
+              class="mx-2"
+            />
+          </a>
+          <!-- User Dropdown login -->
+          <!-- <div class="nav-item dropdown">
+          <span
+            class="dropdown-toggle d-flex align-items-center text-dark"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <img
+              class="rounded-circle me-2"
+              style="aspect-ratio: 1/1"
+              src="src/imgs/clark.jpg"
+              alt="User"
+              width="30px"
+            />
+            <span class="me-1" style="font-size: 15px">Clark</span>
+          </span>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="#">Profile</a></li>
+            <li><a class="dropdown-item" href="#">Settings</a></li>
+            <li>
+              <div class="mx-2">
+                <button
+                  class="dropdown-item btn border-0 text-white bg rounded-3"
+                  id="btn_logout"
+                >
+                  Logout
+                </button>
+              </div>
+            </li>
+          </ul>
+        </div> -->
+          <!-- Login button -->
+          <a href="index.html" class="text-decoration-none">
+            <button
+              class="btn bg text-white rounded-3 mx-2"
+              data-bs-toggle="modal"
+              data-bs-target="#loginModal"
+            >
+              Login
+            </button>
+          </a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
