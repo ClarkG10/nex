@@ -1,4 +1,4 @@
-import { backendURL, headers, hasThreeMinutesPassed, logout } from '../utils/utils.js';
+import { backendURL, headers, logout } from '../utils/utils.js';
 
 logout();
 
@@ -72,7 +72,6 @@ async function getRequests(url='', keyword) {
 }
 
 function getRequestHTML(request, vendor, product, index){
-    const timeCheck = hasThreeMinutesPassed(request.created_at) 
 
     return `<tr>
                     <td class="fw-bold">${index}</td>
@@ -97,7 +96,7 @@ function getRequestHTML(request, vendor, product, index){
                     <td>${request.delivered_date === null ? `Waiting...` : request.delivered_date}</td>
                     <td style="width: 100px">
                       <div class="d-flex">
-                        ${!timeCheck ? `<div class="me-1">
+                        ${request.status !== "Shipped" ? `<div class="me-1">
                           <button
                             type="button"
                             class="btn btn-sm text-white"
@@ -181,8 +180,18 @@ function getUpdateRequest(request, vendor, product){
         </div>
       </div>
 
-        
         <form id="update_form${request.reorder_id}">
+         <div class="form-floating mb-3">
+            <input
+              type="text"
+              class="form-control"
+              id="order_type"
+              placeholder="order_type"
+              name="order_type"
+              required
+            />
+            <label for="quantity">Order Type (Wholesale or Per unit)</label>
+          </div>
           <div class="form-floating mb-3">
             <input
               type="number"

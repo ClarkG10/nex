@@ -50,7 +50,7 @@ async function getVendorProduct(url = "", keyword){
     (keyword ? "keyword=" + encodeURIComponent(keyword) : "");
 
     try {
-        const productResponse = await fetch(url ||`${backendURL}/api/vendor/product` + queryParams,{
+        const productResponse = await fetch(url || `${backendURL}/api/vendor/product` + queryParams,{
             headers: {
                 Accept: 'application/json',
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -83,19 +83,6 @@ async function getVendorProduct(url = "", keyword){
                         </li>`;
                 });
             }
-
-            // for steff designed
-            // let pagination = "";
-            // if (productData.links) {
-            //     productData.links.forEach((link) => {
-            //         pagination += `
-            //             <li class="page-item" >
-            //                 <a class="page-link ${link.url == null ? " disabled" : ""}${link.active ? " active" : ""}" href="#" data-url="${link.url}">
-            //                     ${link.label == "&laquo; Previous" ? `<<` : link.label && link.label == "Next &raquo;" ? `>>` : link.label}
-            //                 </a>
-            //             </li>`;
-            //     });
-            // }
 
             if(!hasProduct){
                 document.getElementById("noProductFound").innerHTML = ` 

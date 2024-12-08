@@ -8,12 +8,12 @@ const createInventoryForm = document.getElementById("create_form");
 createInventoryForm.onsubmit = async (e) => {
     e.preventDefault();
 
-    const productResponse = await fetch (backendURL + '/api/product/all', { headers });
+    const storeInventoryResponse = await fetch (backendURL + '/api/store/inventory', { headers });
 
-    if (!productResponse.ok) {
+    if (!storeInventoryResponse.ok) {
         throw new Error("Can't fetch product data");
     }
-    const productData = await productResponse.json();
+    const inventoryData = await storeInventoryResponse.json();
 
     const formData = new FormData(createInventoryForm);
 
@@ -25,11 +25,21 @@ createInventoryForm.onsubmit = async (e) => {
     createProductButton.disabled = true;
     createProductButton.innerHTML = 'Creating...';
 
-    const isInventoryExist = productData.map(product => product.product_id === formData.get('product_id'))
-
-    if(isInventoryExist.length > 0){
-        alert("Inventory already exist.")
-        return
+    if (inventoryData.length > 0) {
+      const isInventoryExist = inventoryData.map(
+        (product) => product.product_id === parseInt(formData.get("product_id"))
+      );
+  
+      console.log(isInventoryExist);
+  
+      const isTrue = isInventoryExist.find((isExist) => isExist === true);
+  
+      if (isTrue) {
+        alert("Inventory already exists.");
+        createProductButton.disabled = false;
+        createProductButton.innerHTML = "Create";
+        return;
+      }
     }
 
     const inventoryResponse = await fetch (backendURL + '/api/inventory', {
@@ -55,13 +65,13 @@ createInventoryForm.onsubmit = async (e) => {
     createProductButton.innerHTML = 'Create';
 }
 
-async function getInventoryDatas() {
+async function getInventoryDatas(url = "") {
     const getInventoryDatas = document.getElementById("getInventoryDatas");
     const getLowQuantityAlert = document.getElementById("lowQuantityAlert");
     const getProductList = document.getElementById("getProductList");
 
         const [inventoryResponse, vendorResponse, productResponse, profileResponse] = await Promise.all([
-            fetch(backendURL + `/api/store/inventory`, { headers }),
+            fetch(url || backendURL + `/api/store/inventory`, { headers }),
             fetch(backendURL + `/api/user`, { headers }),
             fetch(backendURL + "/api/product/all", { headers }),
             fetch(backendURL + "/api/profile/show", { headers }),
@@ -101,10 +111,11 @@ async function getInventoryDatas() {
                 await updateInventoryStatus(inventory.inventory_id, true);
 
                 const formData = {
-                    quantity: inventory.quantity * 5, 
+                    quantity: inventory.reorder_quantity, 
                     store_id: profileData.id,
                     vendor_id: productData.vendor_id,
                     product_id: inventory.product_id,
+                    order_type: "Retail (per units)",
                 };
 
                 const reorderResponse = await fetch(backendURL + '/api/reorder-request', {
@@ -129,7 +140,7 @@ async function getInventoryDatas() {
             const vendor = vendorDatas.find(vendor => vendor?.id === product?.vendor_id);
             
             productHTML += `<option value="${product.product_id}">
-            ${product.product_name} - ${product.product_type} - ${product.brand} - ${vendor.business_name}</option>`;
+            ${product.product_name} - ${product.product_type} - ${vendor.business_name}</option>`;
         })
 
         getInventoryDatas.innerHTML = inventoryHTML;
