@@ -79,6 +79,7 @@ function getRequestHTML(request, vendor, product, index){
                     <td>${product.product_type}</td>
                     <td>${product.brand}</td>
                     <td>${vendor.business_name}</td>
+                    <td>${request.order_type}</td>
                     <td>${request.quantity}</td>
                     <td class="${request.status === "Approved" 
                     ? `text-success` 
@@ -96,7 +97,7 @@ function getRequestHTML(request, vendor, product, index){
                     <td>${request.delivered_date === null ? `Waiting...` : request.delivered_date}</td>
                     <td style="width: 100px">
                       <div class="d-flex">
-                        ${request.status !== "Shipped" ? `<div class="me-1">
+                        ${request.status !== "Shipped" && request.status !== "Delivered"  ? `<div class="me-1">
                           <button
                             type="button"
                             class="btn btn-sm text-white"

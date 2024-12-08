@@ -71,6 +71,7 @@ function getRequestHTML(storeOrder, store, product){
           <td>${product.product_name}</td>
           <td>${product.brand}</td>
           <td>${product.product_type}</td>
+          <td>${storeOrder.order_type}</td>
           <td>${storeOrder.quantity}</td>
           <td class="${
               storeOrder.status === "Approved" 
