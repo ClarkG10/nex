@@ -12,6 +12,7 @@ body {
     background-color: #9B4DCA !important
 }
 
+
 .nav-link {
     opacity: 70%;
 }
@@ -79,6 +80,7 @@ body {
 
 }
 
+
 .form-floating textarea {
     height: calc(100px) !important;
     border: 1px solid #aaabac !important;
@@ -98,6 +100,9 @@ body {
     outline: none !important;
     border-color: #9B4DCA !important;
 }
+
+
+
 
 .activeLink {
     color: white !important;
@@ -167,3 +172,15 @@ table thead {
     padding-bottom: 5px;
     border-bottom: 2px solid #9B4DCA;
 }
+
+.card-img-top{
+    object-fit: cover;
+    width: 232px !important;
+    height: 150px !important;
+}
+
+/* Filters */
+.filters .btn {
+    color: #9B4DCA;;
+  }
+  
