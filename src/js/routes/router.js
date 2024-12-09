@@ -12,7 +12,8 @@ function setRouter() {
         case `/home.html`:
         case `/storeList.html`:
         case `/productList.html`:
-        case `/cart.html`:
+        case `/productDetail.html`:
+        case `/storeDetail.html`:
             if (orgType === "Customer") {
                 window.location.pathname = `/home.html`;
             } else if (orgType === "Store") {

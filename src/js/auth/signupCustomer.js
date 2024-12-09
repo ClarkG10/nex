@@ -25,7 +25,12 @@ getCustomerForm.onsubmit = async (e) => {
         body: formData,
     });
 
+    const registerData = await registerResponse.json();
+
     if (!registerResponse.ok) {
+        alert(`${registerData.message}`)
+        registerButton.disabled = false;
+        registerButton.innerHTML = `Create an account`;
         throw new Error ("Couldn't register")
     }else{
         alert(`Registration successful!`);

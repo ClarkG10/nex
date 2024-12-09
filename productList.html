@@ -4,14 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="src/css/styles.css" />
+    <link rel="stylesheet" href="src/css/pages.css" />
     <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
     <script type="module" src="assets/js/bootstrap.bundle.min.js"></script>
     <link
       href="https://fonts.googleapis.com/css?family=League Spartan"
       rel="stylesheet"
     />
+    <script type="module" src="src/js/system/productList.js"></script>
     <title>Product List</title>
-   
   </head>
   <body>
     <!-- Navbar -->
@@ -20,7 +21,7 @@
       style="z-index: 1030"
     >
       <div class="d-flex justify-content-between align-items-center mx-2">
-        <!-- logo -->
+        <!-- Logo -->
         <div class="d-flex">
           <img src="src/imgs/NEX1.png" alt="Logo" width="35px" />
           <i class="ms-1 fw-bold fs-5 color mt-1">NEX</i>
@@ -41,7 +42,7 @@
             class="text-decoration-none color activeHoverLink px-3 mx-2"
             >Products</a
           >
-          <!-- not login -->
+          <!-- Not logged in -->
           <img
             class="rounded-circle mx-2"
             style="aspect-ratio: 1/1"
@@ -49,48 +50,15 @@
             alt="User"
             width="30px"
           />
-          <!-- cart icon -->
+          <!-- Cart icon -->
           <a href="cart.html" class="text-decoration-none">
             <img
               src="src/icon/basket-shopping-simple-v.png"
-              alt=""
+              alt="Cart"
               width="25px"
               class="mx-2"
             />
           </a>
-          <!-- User Dropdown login -->
-          <!-- <div class="nav-item dropdown">
-          <span
-            class="dropdown-toggle d-flex align-items-center text-dark"
-            href="#"
-            role="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
-            <img
-              class="rounded-circle me-2"
-              style="aspect-ratio: 1/1"
-              src="src/imgs/clark.jpg"
-              alt="User"
-              width="30px"
-            />
-            <span class="me-1" style="font-size: 15px">Clark</span>
-          </span>
-          <ul class="dropdown-menu dropdown-menu-end">
-            <li><a class="dropdown-item" href="#">Profile</a></li>
-            <li><a class="dropdown-item" href="#">Settings</a></li>
-            <li>
-              <div class="mx-2">
-                <button
-                  class="dropdown-item btn border-0 text-white bg rounded-3"
-                  id="btn_logout"
-                >
-                  Logout
-                </button>
-              </div>
-            </li>
-          </ul>
-        </div> -->
           <!-- Login button -->
           <a href="index.html" class="text-decoration-none">
             <button
@@ -105,13 +73,10 @@
       </div>
     </div>
 
-
-
-   <!-- Content -->
+    <!-- Content -->
     <div class="container-fluid pt-5">
-
       <!-- Filtering and Sorting Section -->
-      <div class="row mt-5 mx-2 ">
+      <div class="row mt-5 mx-2">
         <!-- Filtering by Sections -->
         <div class="col-lg-10">
           <div class="filters d-flex gap-2">
@@ -126,44 +91,24 @@
             </button>
           </div>
         </div>
-
         <!-- Sort By Price Dropdown -->
         <div class="col-lg-2">
-          <select class="form-select w-100 color border-violet-nohover" style="min-width: 150px;">
-            <option  disabled selected>Sort by Price</option>
+          <select
+            class="form-select w-100 color border-violet-nohover"
+            style="min-width: 150px"
+          >
+            <option disabled selected>Sort by Price</option>
             <option>Low to High</option>
             <option>High to Low</option>
           </select>
         </div>
       </div>
-      
-      
-      <!-- rows for products -->
-        <div class="row row-cols-lg-6 g-3 mt-1 mx-2">
-          <!--  Product Card -->
-          <div class="col">
-            <div class="card">
-              <img
-                src="src/imgs/product.png"
-                class="card-img-top"
-                alt="Product Image"
-              />
-              <div class="card-body pt-2">
-                <h5 class="card-title fw-bold color">Product Name</h5>
-                <p class="card-text color">
-                  [shop Name.]
-                </p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <span class="color fw-bold ">Php 1999.99</span>
-                  <button class="btn btn-sm bg text-white">Add to Basket</button>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-        </div>
-        </div>
+
+      <!-- Rows for Products -->
+      <div class="row row-cols-lg-6 g-3 mt-1 mx-2" id="getListOfProducts"></div>
     </div>
-  </div>
+    <nav class="mt-4">
+      <ul class="pagination justify-content-center" id="pages"></ul>
+    </nav>
   </body>
 </html>

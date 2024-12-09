@@ -32,7 +32,7 @@ async function determineUserAccess() {
             window.location.pathname = '/vendorProducts.html';
         } else if (profileData?.role == "Customer") {
             localStorage.setItem('type', 'Customer');
-            window.location.pathname = '/onlineShop.html';
+            window.location.pathname = '/home.html';
         }
     } catch (error) {
         console.error('Error fetching user data');
