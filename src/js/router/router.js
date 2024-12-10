@@ -9,13 +9,9 @@ function setRouter() {
         case `/index.html`:
         case `/signupCustomer.html`:
         case `/signupSeller.html`:
-        case `/home.html`:
-        case `/storeList.html`:
-        case `/productList.html`:
-        case `/cart.html`:
             if (orgType === "Customer") {
                 window.location.pathname = `/home.html`;
-            } else if (orgType === "Store") {
+            } else if (orgType === "Retail") {
                 window.location.pathname = `/storeInventory.html`;
             } else if (orgType === "Vendor") {
                 window.location.pathname = `/vendorProducts.html`;
@@ -37,7 +33,7 @@ function setRouter() {
         case `/vendorReorderRequests.html`:
             if (token === null) {
                 window.location.pathname = `/index.html`;
-            } else if (orgType === "Store") {
+            } else if (orgType === "Retail") {
                 window.location.pathname = `/storeInventory.html`;
             }
             break;
@@ -48,7 +44,7 @@ function setRouter() {
                 window.location.pathname = `/index.html`;
             }
             break;
-
+            
         default:
             break;
     }
