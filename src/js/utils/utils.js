@@ -42,8 +42,10 @@ async function determineUserAccess() {
 }
 
 async function userlogged() {
+    const loggedIn = document.getElementById("loggedIn");
+    let html = "";
+    let hasLoggedIn = false;
     if (localStorage.getItem("token")) {
-        const loggedIn = document.getElementById("loggedIn");
 
         const profileResponse = await fetch(backendURL + '/api/profile/show', {
             headers: {
@@ -59,10 +61,6 @@ async function userlogged() {
         if (profileData?.business_type == 'Retail' || profileData?.business_type == 'Vendor') {
             document.getElementById("business_id").value = profileData.id;
         }
-
-        let html = "";
-        let hasLoggedIn = false;
-
         if (profileData?.role == 'Customer') {
             hasLoggedIn = true;
             html = `
@@ -77,21 +75,21 @@ async function userlogged() {
                 <button type="button" class="btn bg text-white rounded-3 mx-2" id="btn_logout">Logout</button>
             `;
         }
-
-        if (!hasLoggedIn) {
-            html = `
-                <!-- Login button -->
-                <a href="index.html" class="text-decoration-none">
-                    <button class="btn bg text-white rounded-3 mx-2">Login</button>
-                </a>
-            `;
-        }
-
-        loggedIn.innerHTML = html;
-
-        // Initialize logout functionality
-        logout();
+       
     }
+    if (!hasLoggedIn) {
+        html = `
+            <!-- Login button -->
+            <a href="index.html" class="text-decoration-none">
+                <button class="btn bg text-white rounded-3 mx-2">Login</button>
+            </a>
+        `;
+    }
+
+    loggedIn.innerHTML = html;
+
+    // Initialize logout functionality
+    logout();
 }
 
 
