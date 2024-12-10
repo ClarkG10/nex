@@ -1,4 +1,6 @@
-import { backendURL, headers } from '../utils/utils.js';
+import { backendURL, headers, userlogged } from '../utils/utils.js';
+
+userlogged();
 async function getProducts (url=""){
     const getListOfProducts = document.getElementById('getListOfProducts');
 

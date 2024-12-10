@@ -173,14 +173,18 @@ table thead {
     border-bottom: 2px solid #9B4DCA;
 }
 
-.card-img-top{
+.card-img-top {
     object-fit: cover;
-    width: 232px !important;
-    height: 150px !important;
+    width: 140px;
+    height: 140px;
 }
 
 /* Filters */
 .filters .btn {
-    color: #9B4DCA;;
-  }
-  
+    color: #9B4DCA;
+}
+
+.storeProductCard {
+    width: 170px;
+    height: 150px;
+}
