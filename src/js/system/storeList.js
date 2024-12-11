@@ -17,9 +17,11 @@
     const storeInventory = await inventoryResponse.json();
     const productData = await productsResponse.json();
 
+    const shuffledStores = storeData.sort(() => Math.random() - 0.5);
+
     let storeHTML = "";
 
-    storeData.forEach(store => {
+    shuffledStores.forEach(store => {
         if (store.business_type === "Retail") {
             console.log("Retail:", store.business_name);
 

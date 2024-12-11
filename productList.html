@@ -62,7 +62,7 @@
       <!-- Filtering and Sorting Section -->
       <div class="row mt-5 mx-2">
         <!-- Filtering by Sections -->
-        <div class="col-lg-10">
+        <div class="col-lg-10" id="sections">
           <div class="filters d-flex gap-2">
             <button class="btn border-violet text-violet rounded-pill">
               All
@@ -94,5 +94,53 @@
     <nav class="mt-4">
       <ul class="pagination justify-content-center" id="pages"></ul>
     </nav>
+
+    <script>
+      async function addItemToCart({
+        storeId,
+        productId,
+        customerId,
+        quantity,
+      }) {
+        const payload = {
+          store_id: storeId,
+          product_id: productId,
+          customer_id: customerId,
+          quantity: quantity,
+        };
+
+        console.log(payload);
+
+        try {
+          const response = await fetch(
+            "http://ite19-backend.test/api/carts/add",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+              },
+              body: JSON.stringify(payload),
+            }
+          );
+
+          const result = await response.json();
+
+          if (response.ok) {
+            alert(result.message);
+          } else {
+            if (localStorage.getItem("token") == null) {
+              alert("You need to log in to add items to the cart.");
+              return;
+            } else {
+              alert(result.message || "Failed to add item to cart");
+            }
+          }
+        } catch (error) {
+          console.error("Error adding item to cart:", error);
+          alert("Something went wrong. Please try again later.");
+        }
+      }
+    </script>
   </body>
 </html>
