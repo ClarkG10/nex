@@ -97,7 +97,7 @@ function getRequestHTML(request, vendor, product, index){
                     <td>${request.delivered_date === null ? `Waiting...` : request.delivered_date}</td>
                     <td style="width: 100px">
                       <div class="d-flex">
-                        ${request.status !== "Shipped" && request.status !== "Delivered"  ? `<div class="me-1">
+                        ${request.status !== "Shipped" && request.status !== "Delivered" && request.status !== "Declined" ? `<div class="me-1">
                           <button
                             type="button"
                             class="btn btn-sm text-white"

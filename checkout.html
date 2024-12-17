@@ -10,8 +10,8 @@
       href="https://fonts.googleapis.com/css?family=League Spartan"
       rel="stylesheet"
     />
-    <script type="module" src="src/js/system/cart.js"></script>
-    <title>Cart</title>
+    <script type="module" src="src/js/system/checkout.js"></script>
+    <title>Checkout</title>
   </head>
   <body>
     <!-- Navbar -->
@@ -56,19 +56,34 @@
     </div>
     <br /><br /><br />
     <div class="container mt-2">
-      <h2 class="fw-bold">Cart</h2>
-      <div class="text-center bg-white rounded-2 p-3">
+      <h2 class="fw-bold">Checkout</h2>
+      <div class="text-start bg-white rounded-2 p-3">
         <div class="row">
-          <div class="col-5 text-start fw-bold">Items</div>
-          <div class="col-1 opacity-75">Price</div>
+          <div class="col-12 fw-bold color">Delivery Address</div>
+          <div class="col-12 mt-2" id="getInformation"></div>
+        </div>
+      </div>
+      <div class="text-center bg-white rounded-2 p-3 mt-2">
+        <div class="row">
+          <div class="col-6 text-start fw-bold">Ordered Items</div>
+          <div class="col-2 opacity-75">Price</div>
           <div class="col-2 opacity-75">Quantity</div>
-          <div class="col-2 opacity-75">Total Price</div>
-          <div class="col-2 opacity-75">Actions</div>
+          <div class="col-2 opacity-75 text-end">Subtotal</div>
         </div>
       </div>
       <!-- by store -->
-      <div id="getByStoreItemsCart"></div>
+      <div class="text-center bg-white rounded-2 p-3 mt-2">
+        <div class="row text-center" id="getCartItems"></div>
+        <div
+          class="d-flex justify-content-end align-items-end fw-bold"
+          id="total"
+        ></div>
+      </div>
       <!-- by store -->
+      <div
+        class="text-center bg-white rounded-2 p-3 mt-2"
+        id="placeOrder"
+      ></div>
     </div>
   </body>
 </html>
