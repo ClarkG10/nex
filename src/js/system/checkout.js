@@ -34,11 +34,11 @@ async function getCheckoutItems() {
 
     getCartItems.innerHTML = cartItemHTML;
 
-    totalElement.innerHTML = `Total: Php ${finalTotal.toFixed(2)}`;
+    totalElement.innerHTML = `Total: Php ${finalTotal.toFixed(2) + 15}`;
 
     placeOrder.innerHTML = `<div class="d-flex justify-content-end align-items-end">
           <a href="orderConfirmation.html"
-            ><button class="btn bg text-white">Place Order</button></a
+            ><button class="btn bg text-white" cart-id="" customer-id="" total-amount="" store-id="">Place Order</button></a
           >
         </div>`
 
