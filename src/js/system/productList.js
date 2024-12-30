@@ -9,6 +9,7 @@ async function getProducts (url=""){
     const inventoryResponse = await fetch (backendURL + "/api/inventory/all", { headers });
     const storeResponse = await fetch (backendURL + "/api/user", { headers });
     const profileResponse = await fetch (backendURL + "/api/profile/show", { headers });
+
     if (!productsResponse.ok) {
         throw new Error("Can't fetch product data");
     }
@@ -30,17 +31,18 @@ async function getProducts (url=""){
 
     const shuffledProducts = productsData.data.sort(() => Math.random() - 0.5);
 
-    let i = 0;
+    let productHTML = '';
+
     shuffledProducts.forEach(product => {
       const specificProducts = inventoryData.filter(item => item.product_id === product.product_id);
-    
+      
       specificProducts.forEach(inventory => {
         const store = storeData.find(item => item.id === inventory.store_id);
-        getListOfProducts.innerHTML += getProductsHTML(product, store, inventory, profileData);
+        productHTML += getProductsHTML(product, store, inventory, profileData);
       });
-    
-      i++;
     });
+    
+    getListOfProducts.innerHTML = productHTML;
     
     let pagination = "";
     if (productsData.links) {
@@ -98,6 +100,8 @@ const pageAction = async (e) => {
     const url = e.target.getAttribute("data-url");
     await getProducts(url);
   }
+
+
 
 getProducts();
 

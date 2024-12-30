@@ -74,16 +74,65 @@
       <!-- by store -->
       <div class="text-center bg-white rounded-2 p-3 mt-2">
         <div class="row text-center" id="getCartItems"></div>
-        <div
-          class="d-flex justify-content-end align-items-end fw-bold"
-          id="total"
-        ></div>
+        <div class="row mb-2">
+          <div
+            class="col-11 opacity-75 d-flex justify-content-end align-items-end"
+          >
+            Shipping Cost:
+          </div>
+          <div class="col-1 d-flex justify-content-end align-items-end">
+            Php 15
+          </div>
+        </div>
+        <div class="row">
+          <div
+            class="col-11 opacity-75 d-flex justify-content-end align-items-end"
+          >
+            Total:
+          </div>
+          <div
+            class="col-1 d-flex justify-content-end align-items-end fw-bold"
+            id="total"
+          ></div>
+        </div>
       </div>
       <!-- by store -->
+
       <div
         class="text-center bg-white rounded-2 p-3 mt-2"
+        role="button"
+        tabindex="0"
+        data-bs-toggle="modal"
+        data-bs-target="#orderConfirmationModal"
         id="placeOrder"
       ></div>
+    </div>
+
+    <!-- Modal for order confirmation -->
+    <div
+      class="modal fade"
+      id="orderConfirmationModal"
+      tabindex="-1"
+      aria-labelledby="orderConfirmationModalLabel"
+      aria-hidden="true"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+    >
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-body text-center bg-white rounded-3 border-0">
+            <h6 class="fw-bold">You have successfully placed your order.</h6>
+          </div>
+          <div class="modal-footer justify-content-end">
+            <a
+              href="productList.html"
+              class="btn btn-sm bg text-decoration-none text-white"
+            >
+              Continue Shopping
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
   </body>
 </html>

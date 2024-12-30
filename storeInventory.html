@@ -238,9 +238,9 @@
     <div
       class="offcanvas offcanvas-end"
       style="
-        height: 520px !important;
+        height: fit-content !important;
         border-radius: 20px;
-        margin-top: 15px !important;
+        margin-top: 5px !important;
       "
       tabindex="-1"
       id="createInventoryItem"
@@ -265,6 +265,15 @@
       <div class="offcanvas-body">
         <form id="create_form">
           <input type="hidden" name="store_id" id="business_id" />
+          <div class="form-floating mb-3">
+            <select
+              class="form-select form-control"
+              id="getVendorList"
+              aria-label="Floating label select example"
+              required
+            ></select>
+            <label for="floatingSelect">Select Vendor</label>
+          </div>
           <div class="form-floating mb-3">
             <select
               class="form-select form-control"
@@ -297,34 +306,64 @@
             />
             <label for="floatingInput">Price</label>
           </div>
-
+          <strong>Reorder Details</strong>
+          <div class="d-flex">
+            <div class="form-floating mb-3 mt-2 me-2">
+              <input
+                type="number"
+                class="form-control"
+                id="Reorder"
+                placeholder="Reorder Quantity"
+                data-bs-toggle="tooltip"
+                data-bs-placement="left"
+                data-bs-title="Level to alert if the product is in low quantity"
+                name="reorder_quantity"
+                required
+              />
+              <label for="floatingInput">Reorder Alert Quantity</label>
+            </div>
+            <div class="form-floating mt-2">
+              <input
+                type="number"
+                class="form-control"
+                id="reorder Level"
+                placeholder="Reorder Level"
+                data-bs-toggle="tooltip"
+                data-bs-placement="left"
+                data-bs-title="Level to automatically reorder product"
+                name="reorder_level"
+                required
+              />
+              <label for="floatingInput">Reorder Level</label>
+            </div>
+          </div>
           <div class="form-floating mb-3">
             <input
-              type="number"
+              type="text"
               class="form-control"
-              id="Reorder"
-              placeholder="Reorder Quantity"
+              id="orderType"
+              placeholder="Order Type"
               data-bs-toggle="tooltip"
               data-bs-placement="left"
-              data-bs-title="Level to alert if the product is in low quantity"
-              name="reorder_quantity"
+              data-bs-title="Specify the type of order when automatically ordering from the vendor"
+              name="order_type"
               required
             />
-            <label for="floatingInput">Reorder Alert Quantity</label>
+            <label for="orderType">Order Type</label>
           </div>
           <div class="form-floating mb-3">
             <input
               type="number"
               class="form-control"
-              id="reorder Level"
-              placeholder="Reorder Level"
+              id="autoOrderQuantity"
+              placeholder="Auto Order Quantity"
               data-bs-toggle="tooltip"
               data-bs-placement="left"
-              data-bs-title="Level to automatically reorder product"
-              name="reorder_level"
+              data-bs-title="Specify the quantity to reorder automatically when the reorder level is reached"
+              name="auto_order_quantity"
               required
             />
-            <label for="floatingInput">Reorder Level</label>
+            <label for="autoOrderQuantity">Auto Order Quantity</label>
           </div>
           <div>
             <button type="submit" class="btn bg w-100 text-white">

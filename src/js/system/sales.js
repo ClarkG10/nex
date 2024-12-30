@@ -14,7 +14,6 @@ async function getSalesData(url ="", keyword){
     const productsResponse = await fetch(backendURL + '/api/product/all', { headers });
     const customersResponse = await fetch(backendURL + '/api/customer', { headers });
 
-
     if (!salesResponse.ok) {
         throw new Error('Failed to fetch sales data');
     }

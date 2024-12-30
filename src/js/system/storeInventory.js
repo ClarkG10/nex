@@ -90,7 +90,8 @@ async function getInventoryDatas(url = "") {
 
         let inventoryHTML = "", hasInventory = false, index = 0, hasLowQuantity = false, lowQuantityHTML = "", productHTML = "";
 
-        for (const inventory of inventoryDatas.data) {
+        // if(inventoryDatas.length > 0){
+          for (const inventory of inventoryDatas.data) {
             const productData = productDatas.find(product => product?.product_id === inventory?.product_id);
             const vendorName = vendorDatas.find(vendor => vendor?.id === productData?.vendor_id);
             hasInventory = true;
@@ -111,11 +112,11 @@ async function getInventoryDatas(url = "") {
                 await updateInventoryStatus(inventory.inventory_id, true);
 
                 const formData = {
-                    quantity: inventory.reorder_quantity, 
+                    quantity: inventory.auto_order_quantity, 
                     store_id: profileData.id,
                     vendor_id: productData.vendor_id,
                     product_id: inventory.product_id,
-                    order_type: "Retail (per units)",
+                    order_type: inventory.order_type,
                 };
 
                 const reorderResponse = await fetch(backendURL + '/api/reorder-request', {
@@ -134,18 +135,19 @@ async function getInventoryDatas(url = "") {
                 console.log(`Reorder request created successfully for product ID: ${inventory.product_id}`);
             }
         }
+        // }
 
-        productHTML = `<option selected disabled>Select product</option>`
-        productDatas.forEach(product => {
-            const vendor = vendorDatas.find(vendor => vendor?.id === product?.vendor_id);
+        // productHTML = `<option selected disabled>Select product</option>`
+        // productDatas.forEach(product => {
+        //     const vendor = vendorDatas.find(vendor => vendor?.id === product?.vendor_id);
             
-            productHTML += `<option value="${product.product_id}">
-            ${product.product_name} - ${product.product_type} - ${vendor.business_name}</option>`;
-        })
+        //     productHTML += `<option value="${product.product_id}">
+        //     ${product.product_name} - ${product.product_type} - ${vendor.business_name}</option>`;
+        // })
 
         getInventoryDatas.innerHTML = inventoryHTML;
         getLowQuantityAlert.innerHTML = lowQuantityHTML;
-        getProductList.innerHTML = productHTML;
+        // getProductList.innerHTML = productHTML;
 
         let pagination = "";
         if (inventoryDatas.links) {
@@ -209,8 +211,6 @@ async function updateInventoryStatus(inventoryId, isReordered) {
         throw new Error(`Failed to update inventory status for ID: ${inventoryId}`);
     }
 }
-
-
 
 function getInventoryHTML(inventory, vendor, product, index) {
     return `<tr>
@@ -298,7 +298,7 @@ function updateInventory(inventory, product) {
     return` <div
       class="offcanvas offcanvas-end"
       style="
-        height: 440px !important;
+        height: fit-content !important;
         border-radius: 20px;
         margin-top: 15px !important;
       "
@@ -349,8 +349,8 @@ function updateInventory(inventory, product) {
             />
             <label for="Price">Price</label>
           </div>
-
-          <div class="form-floating mb-3">
+          <strong>Reorder Details</strong>
+          <div class="form-floating mb-3 mt-2">
             <input
               type="number"
               class="form-control"
@@ -379,7 +379,37 @@ function updateInventory(inventory, product) {
               name="reorder_level"
               required
             />
-            <label for="Reorder Leve">Reorder Level</label>
+            <label for="Reorder Level">Reorder Level</label>
+          </div>
+           <div class="form-floating mb-3">
+            <input
+              type="text"
+              class="form-control"
+              id="orderType"
+              placeholder="Order Type"
+              data-bs-toggle="tooltip"
+              data-bs-placement="left"
+              data-bs-title="Specify the type of order when automatically ordering from the vendor"
+              value=${inventory.order_type}
+              name="order_type"
+              required
+            />
+            <label for="orderType">Order Type</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input
+              type="number"
+              class="form-control"
+              id="autoOrderQuantity"
+              placeholder="Auto Order Quantity"
+              data-bs-toggle="tooltip"
+              data-bs-placement="left"
+              data-bs-title="Specify the quantity to reorder automatically when the reorder level is reached"
+              value=${inventory.auto_order_quantity}
+              name="auto_order_quantity"
+              required
+            />
+            <label for="autoOrderQuantity">Auto Order Quantity</label>
           </div>
           <div>
             <button type="submit" class="btn bg w-100 text-white updateButton" id="button${inventory.inventory_id}" data-id="${inventory.inventory_id}">
@@ -447,6 +477,17 @@ function getReorderRequestHTML(inventory, product, vendor){
         <input type="hidden" name="vendor_id" value="${product.vendor_id}">
         <input type="hidden" name="store_id" value="${inventory.store_id}">
         <input type="hidden" name="product_id" value="${product.product_id}">
+        <div class="form-floating mb-3">
+            <input
+              type="text"
+              class="form-control"
+              id="quantity"
+              placeholder="Quantity"
+              name="order_type"
+              required
+            />
+            <label for="floatingInput">Input type of order</label>
+          </div>
           <div class="form-floating mb-3">
             <input
               type="number"
@@ -468,6 +509,53 @@ function getReorderRequestHTML(inventory, product, vendor){
     </div>`
 }
 
+async function populateVendorAndProductLists() {
+    const vendorResponse = await fetch(backendURL + '/api/user', { headers });
+    const productResponse = await fetch(backendURL + '/api/product/all', { headers });
+
+    if (!vendorResponse.ok || !productResponse.ok) {
+      throw new Error("Failed to fetch data");
+    }
+
+    const vendorDatas = await vendorResponse.json();
+    const productDatas = await productResponse.json();
+
+    const getVendorList = document.getElementById('getVendorList');
+    const getProductList = document.getElementById('getProductList');
+
+    getVendorList.innerHTML = `<option selected disabled>Select Vendor</option>`;
+    getProductList.innerHTML = `<option selected disabled>Select Product</option>`;
+
+    vendorDatas.filter(v => v.business_type === "Vendor").forEach(vendor => {
+      const vendorOption = document.createElement('option');
+      vendorOption.value = vendor.id;
+      vendorOption.textContent = vendor.business_name;
+      getVendorList.appendChild(vendorOption);
+    });
+
+    // Event listener for Vendor selection change
+    getVendorList.addEventListener('change', function() {
+      const selectedVendorId = this.value;
+      updateProductList(selectedVendorId, productDatas, getProductList);
+    });
+
+    function updateProductList(vendorId, productDatas, productList) {
+      productList.innerHTML = `<option selected disabled>Select Product</option>`;
+
+      const filteredProducts = productDatas.filter(product => product.vendor_id === parseInt(vendorId));
+      
+      filteredProducts.forEach(product => {
+        const productOption = document.createElement('option');
+        productOption.value = product.product_id;
+        productOption.textContent = `${product.product_name} - ${product.product_type}`;
+        productList.appendChild(productOption);
+      });
+    }
+}
+
+// Initialize the vendor and product lists
+populateVendorAndProductLists();
+
 const pageAction = async (e) => {
     e.preventDefault();
     const url = e.target.getAttribute("data-url");
@@ -487,10 +575,10 @@ const pageAction = async (e) => {
     }
 
     function reorderClick(e) {
-        const id = e.target.getAttribute("data-id");
-        console.log(id)
-        reorderInfo(id);
-      }
+      const id = e.target.getAttribute("data-id");
+      console.log(id)
+      reorderInfo(id);
+    }
   
     async function updateInfo(id) {
       const update_form = document.getElementById("update_form" + id);
@@ -588,6 +676,7 @@ const pageAction = async (e) => {
 
             else if(reorderResponse.ok) {
                 alert("Reorder Request Sent")
+                await updateInventoryStatus(id, true);
                 await getInventoryDatas();
             }
 

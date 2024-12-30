@@ -19,6 +19,8 @@
 
     const shuffledStores = storeData.sort(() => Math.random() - 0.5);
 
+    console.log(productData)
+
     let storeHTML = "";
 
     shuffledStores.forEach(store => {

@@ -6,6 +6,7 @@ async function getCheckoutItems() {
     const getCartItems = document.getElementById("getCartItems");
     const getInformation = document.getElementById("getInformation");
     const totalElement = document.getElementById("total");
+    const placeOrder = document.getElementById("placeOrder");
     const urlParams = new URLSearchParams(window.location.search);
     const cartId = urlParams.get("cart_id");
 
@@ -26,20 +27,21 @@ async function getCheckoutItems() {
     const cart = cartData.find(item => item.id == cartId);
     let cartItemHTML = "";
     let finalTotal = 0;
+    let total = 0;
 
     cart.items.forEach(item => {
         cartItemHTML += getItemHTML(item, productsData);
-        finalTotal += parseFloat(item.price) * parseInt(item.quantity);
+        total += parseFloat(item.price) * parseInt(item.quantity);
     });
+
+    finalTotal = parseFloat(total.toFixed(2)) + parseInt(15)
 
     getCartItems.innerHTML = cartItemHTML;
 
-    totalElement.innerHTML = `Total: Php ${finalTotal.toFixed(2) + 15}`;
+    totalElement.innerHTML = `Php ${finalTotal}`;
 
     placeOrder.innerHTML = `<div class="d-flex justify-content-end align-items-end">
-          <a href="orderConfirmation.html"
-            ><button class="btn bg text-white" cart-id="" customer-id="" total-amount="" store-id="">Place Order</button></a
-          >
+    <button type="submit" class="btn bg text-white placeOrderButton" cart-id="${cartId}" customer-id="${cart.customer_id}" total-amount="${finalTotal}" store-id="${cart.store_id}" customer-address="${profileData.address}" ship-cost="${15}">Place Order</button>
         </div>`
 
     getInformation.innerHTML = `
@@ -50,6 +52,11 @@ async function getCheckoutItems() {
         </div>
         <div class="col-9">${profileData.address}</div>
       </div>`;
+
+      document.querySelectorAll(".placeOrderButton").forEach(button => {
+        button.addEventListener("click", placeOrderButtonClick);
+    });
+
 }
 
 function getItemHTML(item, productsData) {
@@ -70,5 +77,53 @@ function getItemHTML(item, productsData) {
     <div class="col-2 mt-4">${item.quantity}</div>
     <div class="col-2 mt-4 text-end">Php ${(parseFloat(item.price) * parseInt(item.quantity)).toFixed(2)}</div>`;
 }
+
+function placeOrderButtonClick(e){
+  const data = {
+    cart_id: e.target.getAttribute("cart-id"),
+    customer_id: e.target.getAttribute("customer-id"),
+    total_amount: e.target.getAttribute("total-amount"),
+    store_id: e.target.getAttribute("store-id"),
+    shipping_address: e.target.getAttribute("customer-address"),
+    shipping_cost: e.target.getAttribute("ship-cost")
+  }
+  console.log(data);
+  placeOrder(data);
+  }
+
+  async function placeOrder(data) {
+
+    const orderResponse = await fetch(backendURL + "/api/order", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      }  ,
+      body: JSON.stringify(data),
+    });
+
+    if (!orderResponse.ok) throw new Error("Failed to place order");
+
+    if(orderResponse.ok){
+      updateCartStatus(data.cart_id);
+      console.log("Order placed successfully");
+    }
+  }
+
+  async function updateCartStatus(cartId){
+    const updateCartResponse = await fetch(backendURL + `/api/carts/${cartId}/update-status`, {
+      method: "PUT",
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      }
+    });
+
+    if (!updateCartResponse.ok) throw new Error("Failed to update cart status");
+
+    console.log("Cart status updated successfully");
+  }
 
 getCheckoutItems();
