@@ -135,7 +135,5 @@ function getStoreProducts(inventory, products) {
     return storeProductsHTML;
 }
 
-
-
 logout();
  getAllStores();

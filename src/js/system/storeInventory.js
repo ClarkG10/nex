@@ -65,13 +65,18 @@ createInventoryForm.onsubmit = async (e) => {
     createProductButton.innerHTML = 'Create';
 }
 
-async function getInventoryDatas(url = "") {
+async function getInventoryDatas(url = "", keyword) {
     const getInventoryDatas = document.getElementById("getInventoryDatas");
     const getLowQuantityAlert = document.getElementById("lowQuantityAlert");
-    const getProductList = document.getElementById("getProductList");
+    // const getProductList = document.getElementById("getProductList");
+
+    let queryParams = 
+    "?" + 
+    (url ? new URL(url).searchParams + "&" : "") + 
+    (keyword ? "keyword=" + encodeURIComponent(keyword) : "");
 
         const [inventoryResponse, vendorResponse, productResponse, profileResponse] = await Promise.all([
-            fetch(url || backendURL + `/api/store/inventory`, { headers }),
+            fetch(url || backendURL + `/api/store/inventory` + queryParams, { headers }),
             fetch(backendURL + `/api/user`, { headers }),
             fetch(backendURL + "/api/product/all", { headers }),
             fetch(backendURL + "/api/profile/show", { headers }),
@@ -87,6 +92,8 @@ async function getInventoryDatas(url = "") {
             productResponse.json(),
             profileResponse.json(),
         ]);
+
+        console.log(inventoryDatas)
 
         let inventoryHTML = "", hasInventory = false, index = 0, hasLowQuantity = false, lowQuantityHTML = "", productHTML = "";
 
@@ -137,17 +144,8 @@ async function getInventoryDatas(url = "") {
         }
         // }
 
-        // productHTML = `<option selected disabled>Select product</option>`
-        // productDatas.forEach(product => {
-        //     const vendor = vendorDatas.find(vendor => vendor?.id === product?.vendor_id);
-            
-        //     productHTML += `<option value="${product.product_id}">
-        //     ${product.product_name} - ${product.product_type} - ${vendor.business_name}</option>`;
-        // })
-
         getInventoryDatas.innerHTML = inventoryHTML;
         getLowQuantityAlert.innerHTML = lowQuantityHTML;
-        // getProductList.innerHTML = productHTML;
 
         let pagination = "";
         if (inventoryDatas.links) {
@@ -555,6 +553,16 @@ async function populateVendorAndProductLists() {
 
 // Initialize the vendor and product lists
 populateVendorAndProductLists();
+
+const search_form = document.getElementById("search_form");
+search_form.onsubmit = async (e) => {
+    e.preventDefault(); 
+
+    const formData = new FormData(search_form); 
+    const keyword = formData.get("keyword");
+    console.log(keyword); 
+    getInventoryDatas("", keyword);
+}
 
 const pageAction = async (e) => {
     e.preventDefault();

@@ -165,8 +165,20 @@
         <h5 class="fw-bold">Product Inventory Management</h5>
         <span>Manage inventory</span>
       </div>
-
-      <div class="row d-flex justify-content-center mt-2">
+      <!-- search bar -->
+      <div>
+        <form id="search_form" class="my-2 d-flex">
+          <input
+            type="text"
+            id="searchInput"
+            class="form-control me-2"
+            placeholder="Search by product name, brand, or description and etc..."
+            name="keyword"
+          />
+          <button type="submit" class="btn border-violet color">Search</button>
+        </form>
+      </div>
+      <div class="row d-flex justify-content-center">
         <div class="col-lg-9 col-sm-12 mt-2">
           <div class="bg-white shadow-sm p-3 rounded-3">
             <div class="d-flex justify-content-between mb-2">

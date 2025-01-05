@@ -39,7 +39,7 @@ function setRouter() {
             break;
         
         case `/checkout.html`:
-        case `/orderConfirmation.html`:
+        case `/cart.html`:
             if (token === null) {
                 window.location.pathname = `/index.html`;
             }

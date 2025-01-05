@@ -4,7 +4,7 @@ userlogged();
 logout();
 
 async function getCart(){
-    const getCartByStore = document.getElementById('getByStoreItemsCart');
+    // const getCartByStore = document.getElementById('getByStoreItemsCart');
 
     const cartResponse = await fetch(backendURL + '/api/carts/by-store', { headers });
     const productsResponse = await fetch(backendURL + '/api/product/all', { headers });
@@ -58,7 +58,7 @@ function getCartHTML(cart, store, products) {
             </div>
             <!-- list of products by store -->
             <div class="row">
-              ${getCartItems(cart.items, products, cart.id)}
+              ${getCartItems(cart.items, products)}
             </div>
             <!-- end product -->
             <div class="mt-2 d-flex justify-content-end align-items-end">

@@ -32,6 +32,8 @@ async function getOrders(url="", keyword){
     const productData = await productResponse.json();
     const cartData = await cartResponse.json();
 
+    console.log(orderData);
+
     if(orderResponse.ok){
         let hasOrder = false, orderHTML = "", i = 0;
 

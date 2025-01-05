@@ -59,8 +59,20 @@
 
     <!-- Content -->
     <div class="container-fluid pt-5">
+      <!-- create search input and button -->
+      <form id="search_form">
+        <div class="input-group rounded-pill pt-5">
+          <input
+            type="text"
+            class="form-control rounded-pill border-violet-nohover ms-3 me-2"
+            placeholder="Search..."
+            name="keyword"
+          />
+          <button class="btn bg text-white rounded-pill">search</button>
+        </div>
+      </form>
       <!-- Filtering and Sorting Section -->
-      <div class="row mt-5 mx-2">
+      <div class="row mt-3 mx-2">
         <!-- Filtering by Sections -->
         <div class="col-lg-10" id="sections">
           <div class="filters d-flex gap-2">
@@ -127,7 +139,11 @@
           const result = await response.json();
 
           if (response.ok) {
-            alert(result.message);
+            if (action === "buyNow") {
+              window.location.href = "cart.html";
+            } else {
+              alert(result.message);
+            }
           } else {
             if (localStorage.getItem("token") == null) {
               alert("You need to log in to add items to the cart.");
