@@ -22,10 +22,12 @@
     >
       <div class="d-flex justify-content-between align-items-center mx-2">
         <!-- Logo -->
-        <div class="d-flex">
-          <img src="src/imgs/NEX1.png" alt="Logo" width="35px" />
-          <i class="ms-1 fw-bold fs-5 color mt-1">NEX</i>
-        </div>
+        <a href="home.html" class="text-decoration-none"
+          ><div class="d-flex">
+            <img src="src/imgs/NEX1.png" alt="Logo" width="35px" />
+            <i class="ms-1 fw-bold fs-5 color mt-1">NEX</i>
+          </div></a
+        >
         <div>
           <a
             href="home.html"
@@ -113,6 +115,7 @@
         productId,
         customerId,
         quantity,
+        action,
       }) {
         const payload = {
           store_id: storeId,

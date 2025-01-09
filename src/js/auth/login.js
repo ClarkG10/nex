@@ -9,7 +9,10 @@ form_login.onsubmit = async (e) => {
     const loginButton =  document.querySelector("#form_login button");
 
     loginButton.disabled = true;
-    loginButton.innerHTML = `<div class="spinner-border" role="status" width="30px"></div><span class="ms-2">Loading...</span>`;
+    loginButton.innerHTML = `
+    <div class="spinner-border spinner-border-sm" role="status" style="width: 20px; height: 20px;"></div>
+    <span class="ms-2">Loading...</span>
+`;
   
     const formData = new FormData(form_login);
 

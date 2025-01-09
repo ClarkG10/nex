@@ -6,25 +6,32 @@ logout();
 async function getPopularProduct() {
     const getPopularProducts = document.getElementById('getPopularProducts');
   
-      const [productsResponse, salesResponse, storeResponse, inventoryResponse, profileResponse] = await Promise.all([
+      const [productsResponse, salesResponse, storeResponse, inventoryResponse] = await Promise.all([
         fetch(backendURL + '/api/product/all', { headers }),
         fetch(backendURL + '/api/sales', { headers }),
         fetch(backendURL + '/api/user', { headers }),
         fetch(backendURL + '/api/inventory/all', { headers }),
-        fetch(backendURL + '/api/profile/show', { headers }),
       ]);
   
-      if (!productsResponse.ok || !salesResponse.ok || !storeResponse.ok || !inventoryResponse.ok || !profileResponse.ok) {
+      if (!productsResponse.ok || !salesResponse.ok || !storeResponse.ok || !inventoryResponse.ok) {
         throw new Error("Failed to fetch data");
       }
   
-      const [productsData, salesData, storesData, inventoryData, profileData] = await Promise.all([
+      const [productsData, salesData, storesData, inventoryData] = await Promise.all([
         productsResponse.json(),
         salesResponse.json(),
         storeResponse.json(),
         inventoryResponse.json(),
-        profileResponse.json(),
       ]);
+
+      let profileData = null;
+      const token = localStorage.getItem('token');
+
+      if(token){
+        const profileResponse = await fetch(backendURL + '/api/profile/show', { headers });
+        if(!profileResponse.ok) throw new Error ("Failed to fetch profile");
+        profileData = await profileResponse.json();
+      }
   
       const productQuantities = {};
       salesData.forEach(sale => {
@@ -66,7 +73,7 @@ async function getPopularProduct() {
                   <p class="card-text color">${storeDetails?.business_name || 'Loading...'}</p>
                   <div class="d-flex justify-content-between align-items-center">
                     <span class="color fw-bold">Php ${inventoryDetails?.new_price || 'Loading...'}</span>
-                    <button class="btn btn-sm bg text-white" onclick="addItemToCart({ storeId: ${storeDetails?.id}, productId: ${productDetails.product_id}, customerId: ${profileData.customer_id}, quantity: 1 })">
+                    <button class="btn btn-sm bg text-white" onclick="addItemToCart({ storeId: ${storeDetails?.id}, productId: ${productDetails.product_id}, customerId: ${profileData?.customer_id}, quantity: 1 })">
                       Add to Basket
                     </button>
                   </div>

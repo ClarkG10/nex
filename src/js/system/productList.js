@@ -34,6 +34,7 @@ async function getProducts(url="", keyword){
     const productsData = await productsResponse.json();
     const storeData = await storeResponse.json();
 
+    // shuffle the products
     const shuffledProducts = productsData.data.sort(() => Math.random() - 0.5);
 
     let productHTML = '';
@@ -78,10 +79,10 @@ function getProductsHTML(product, store, inventory, customer){
               alt="Product Image"
             />
             <div class="card-body pt-2">
-              <h5 class="card-title fw-bold color">${product.product_name}</h5>
-              <p class="card-text color">${store.business_name}</p>
+              <h6 class="card-title fw-bold color">${product.product_name}</h6>
+              <small class="card-text color">${store.business_name}</small>
               <div class="d-flex justify-content-between align-items-center">
-                <span class="color fw-bold">Php ${inventory.new_price}</span>
+                <span class="color fw-bold">₱ ${inventory.new_price}</span>
                 <span class="d-flex">
                 <button 
                     class="btn border-violet color btn-sm me-1" 

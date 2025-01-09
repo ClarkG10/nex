@@ -130,7 +130,8 @@ function getOrderHTML(order, customer, products, index) {
                        ${order.status === "Shipped" ? ` <button
                           class="btn btn-sm btn-outline-success updateStatusButton"
                           data-id="${order.order_id}" 
-                          cart-id="${order.cart_id}"  
+                          cart-id="${order.cart_id}"
+                          payment-method="${order.payment_method}"
                           data-status="Delivered"
                         >
                           Mark as Delivered
@@ -167,12 +168,13 @@ function updateClickStatus(e) {
     const id = e.target.getAttribute("data-id");
     const status = e.target.getAttribute("data-status");
     const cartId = e.target.getAttribute("cart-id");
-    console.log(id, status, cartId);
-    updateRequestStatus(id, status, cartId);
+    const paymentMethod = e.target.getAttribute("payment-method");
+    console.log(id, status, cartId, paymentMethod);
+    updateRequestStatus(id, status, cartId, paymentMethod);
 }
 
 
-async function updateRequestStatus(id, status, cartId) {
+async function updateRequestStatus(id, status, cartId, paymentMethod) {
     if (confirm(`Are you sure you want to this?`)) {
         const formData = new FormData();
         formData.append("status", status);
@@ -180,9 +182,11 @@ async function updateRequestStatus(id, status, cartId) {
 
         if (status === "Shipped") {
             formData.append("shipped_date", currentDate);
-        } else if (status === "Delivered") {
+        } else if (status === "Delivered" && paymentMethod !== "Online Payment") {
             storeAsSale(cartId);
             formData.append("delivered_date", currentDate);
+        }else{
+          formData.append("delivered_date", currentDate);
         }
 
         formData.append("_method", "PUT");

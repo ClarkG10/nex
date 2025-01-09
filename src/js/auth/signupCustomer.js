@@ -14,8 +14,9 @@ getCustomerForm.onsubmit = async (e) => {
     const registerButton = document.querySelector("#form_register button");
 
     registerButton.disabled = true;
-    registerButton.innerHTML = `<div class="spinner-border" role="status" width="30px">
-                                                                </div><span class="ms-2">loading...</span>`;
+    registerButton.innerHTML =`<div class="spinner-border spinner-border-sm" role="status" style="width: 20px; height: 20px;"></div>
+    <span class="ms-2">Loading...</span>
+`;
 
     const registerResponse = await fetch(backendURL + "/api/customer", {
         method: "POST",

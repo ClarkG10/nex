@@ -97,7 +97,7 @@ async function getInventoryDatas(url = "", keyword) {
 
         let inventoryHTML = "", hasInventory = false, index = 0, hasLowQuantity = false, lowQuantityHTML = "", productHTML = "";
 
-        // if(inventoryDatas.length > 0){
+        if(inventoryDatas.data.length > 0){
           for (const inventory of inventoryDatas.data) {
             const productData = productDatas.find(product => product?.product_id === inventory?.product_id);
             const vendorName = vendorDatas.find(vendor => vendor?.id === productData?.vendor_id);
@@ -142,7 +142,7 @@ async function getInventoryDatas(url = "", keyword) {
                 console.log(`Reorder request created successfully for product ID: ${inventory.product_id}`);
             }
         }
-        // }
+        }
 
         getInventoryDatas.innerHTML = inventoryHTML;
         getLowQuantityAlert.innerHTML = lowQuantityHTML;
